@@ -1,6 +1,12 @@
+import ContentDisplay from "@/app/components/ContentDisplay";
+
 const SubContents = ({ params }) => {
   const { subcontentid } = params;
-  return <div>{subcontentid}</div>;
+  return (
+    <div>
+      <ContentDisplay id={subcontentid} />
+    </div>
+  );
 };
 
 export default SubContents;
