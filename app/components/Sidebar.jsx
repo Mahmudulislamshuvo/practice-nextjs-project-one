@@ -1,15 +1,20 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+import React, { useEffect } from "react";
 
 const Sidebar = ({ docs }) => {
+  const pathName = usePathname();
+
+  useEffect(() => {}, [pathName]);
+
   const roots = docs.filter((doc) => !doc.parent);
 
   const nonRoots = Object.groupBy(
     docs.filter((doc) => doc.parent),
     ({ parent }) => parent
   );
-
-  console.log({ nonRoots });
 
   return (
     <div>

@@ -4,7 +4,7 @@ const Tag = ({ tag }) => {
   return (
     <Link
       key={tag}
-      href={`/tag/${tag}`}
+      href={`/teg/${tag}`}
       className="bg-gray-200 p-1 rounded-md mr-2 text-xs"
     >
       {tag}
