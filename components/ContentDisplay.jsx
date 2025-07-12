@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getDocumentContent } from "../lib/docs";
+import { getDocumentContent } from "../app/lib/docs";
 import Tag from "./Tags";
 
 const ContentDisplay = async ({ id }) => {

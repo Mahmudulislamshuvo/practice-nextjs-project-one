@@ -1,13 +1,51 @@
 "use client";
 
+import {
+  getDocumentsByAuthor,
+  getDocumentsByCategory,
+  getDocumentsByTag,
+} from "@/utils/doc-util";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 const Sidebar = ({ docs }) => {
   const pathName = usePathname();
+  // const docsRef = useRef(docs);
 
-  useEffect(() => {}, [pathName]);
+  // useEffect(() => {
+  //   let matchedDocs = docsRef.current;
+
+  //   if (pathName.includes("/teg")) {
+  //     const teg = pathName.split("/")[2];
+  //     matchedDocs = getDocumentsByTag(docs, teg);
+  //     //
+  //   } else if (pathName.includes("/authors")) {
+  //     const author = pathName.split("/")[2];
+  //     matchedDocs = getDocumentsByAuthor(docs, author);
+  //     //
+  //   } else if (pathName.includes("/categories")) {
+  //     const category = pathName.split("/")[2];
+  //     matchedDocs = getDocumentsByCategory(docs, category);
+  //   }
+  // }, [pathName]);
+
+  const docsRef = useRef(docs);
+
+  useEffect(() => {
+    let matchedDocs = docsRef.current;
+
+    if (pathName.includes("/teg")) {
+      const teg = pathName.split("/")[2];
+      matchedDocs = getDocumentsByTag(docsRef.current, teg);
+    } else if (pathName.includes("/authors")) {
+      const author = pathName.split("/")[2];
+      matchedDocs = getDocumentsByAuthor(docsRef.current, author);
+    } else if (pathName.includes("/categories")) {
+      const category = pathName.split("/")[2];
+      matchedDocs = getDocumentsByCategory(docsRef.current, category);
+    }
+  }, [pathName]);
 
   const roots = docs.filter((doc) => !doc.parent);
 
