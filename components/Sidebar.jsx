@@ -7,52 +7,59 @@ import {
 } from "@/utils/doc-util";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Sidebar = ({ docs }) => {
+  const [rootNodes, setRootNodes] = useState([]);
+  const [nonRootNodesGrouped, setNonRootNodesGrouped] = useState({});
   const pathName = usePathname();
-  // const docsRef = useRef(docs);
-
-  // useEffect(() => {
-  //   let matchedDocs = docsRef.current;
-
-  //   if (pathName.includes("/teg")) {
-  //     const teg = pathName.split("/")[2];
-  //     matchedDocs = getDocumentsByTag(docs, teg);
-  //     //
-  //   } else if (pathName.includes("/authors")) {
-  //     const author = pathName.split("/")[2];
-  //     matchedDocs = getDocumentsByAuthor(docs, author);
-  //     //
-  //   } else if (pathName.includes("/categories")) {
-  //     const category = pathName.split("/")[2];
-  //     matchedDocs = getDocumentsByCategory(docs, category);
-  //   }
-  // }, [pathName]);
-
-  const docsRef = useRef(docs);
 
   useEffect(() => {
-    let matchedDocs = docsRef.current;
+    let matchedDocs = docs;
 
     if (pathName.includes("/teg")) {
       const teg = pathName.split("/")[2];
-      matchedDocs = getDocumentsByTag(docsRef.current, teg);
+      matchedDocs = getDocumentsByTag(docs, teg);
     } else if (pathName.includes("/authors")) {
       const author = pathName.split("/")[2];
-      matchedDocs = getDocumentsByAuthor(docsRef.current, author);
+      matchedDocs = getDocumentsByAuthor(docs, author);
     } else if (pathName.includes("/categories")) {
       const category = pathName.split("/")[2];
-      matchedDocs = getDocumentsByCategory(docsRef.current, category);
+      matchedDocs = getDocumentsByCategory(docs, category);
     }
-  }, [pathName]);
 
-  const roots = docs.filter((doc) => !doc.parent);
+    const roots = matchedDocs.filter((doc) => !doc.parent);
 
-  const nonRoots = Object.groupBy(
-    docs.filter((doc) => doc.parent),
-    ({ parent }) => parent
-  );
+    const nonRoots = Object.groupBy(
+      matchedDocs.filter((doc) => doc.parent),
+      ({ parent }) => parent
+    );
+
+    const nonRootsJeys = Reflect.ownKeys(nonRoots);
+
+    nonRootsJeys.forEach((key) => {
+      const foundInRoots = roots.find((root) => root.id === key);
+      if (!foundInRoots) {
+        const foundInDocs = docs.find((doc) => doc?.id === key);
+        if (foundInDocs) {
+          roots.push(foundInDocs);
+        }
+      }
+    });
+
+    roots.sort((a, b) => {
+      if (a.order < b.order) {
+        return -1;
+      }
+      if (a.order > b.order) {
+        return 1;
+      }
+      return 0;
+    });
+
+    setRootNodes([...roots]);
+    setNonRootNodesGrouped({ ...nonRoots });
+  }, [pathName, docs]);
 
   return (
     <div>
@@ -63,7 +70,7 @@ const Sidebar = ({ docs }) => {
             <div className="absolute inset-y-0 left-2 w-px bg-zinc-900/10 dark:bg-white/5"></div>
             <div className="absolute left-2 h-6 w-px bg-emerald-500"></div>
             <ul role="list" className="border-l border-transparent">
-              {roots.map((rootNode) => (
+              {rootNodes?.map((rootNode) => (
                 <li key={rootNode.id} className="relative">
                   <Link
                     aria-current="page"
@@ -72,9 +79,9 @@ const Sidebar = ({ docs }) => {
                   >
                     <span className="truncate">{rootNode.title}</span>
                   </Link>
-                  {nonRoots[rootNode.id] && (
+                  {nonRootNodesGrouped[rootNode.id] && (
                     <ul role="list" className="border-l border-transparent">
-                      {nonRoots[rootNode.id].map((subRoot) => (
+                      {nonRootNodesGrouped[rootNode.id].map((subRoot) => (
                         <li key={subRoot.id}>
                           <Link
                             className="flex justify-between gap-2 py-1 pl-7 pr-3 text-sm text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
