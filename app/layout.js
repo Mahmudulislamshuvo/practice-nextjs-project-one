@@ -1,9 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { getDocuments } from "./lib/docs";
-import Header from "../components/Header";
 import { Suspense } from "react";
+import Header from "../components/Header";
 import LoadingCreazy from "@/components/LoadingCreazy";
+import { getDocuments } from "./lib/docs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,8 +12,8 @@ export const metadata = {
   description: "A Documentation website by protocol",
 };
 
-export default function RootLayout({ children }) {
-  const allDocuments = getDocuments();
+export default async function RootLayout({ children }) {
+  const allDocuments = await getDocuments(); // Make sure getDocuments is async
 
   return (
     <html lang="en">
