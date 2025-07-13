@@ -185,7 +185,7 @@ Your markdown content…
 
 ## লাইসেন্স
 
-এই প্রজেক্টটি ওপেন সোর্স। লাইসেন্স এখানে যোগ করুন।
+এই প্রজেক্টটি ওপেন সোর্স। This project is licensed under the MIT License.
 
 ---
 
@@ -403,4 +403,4 @@ Static assets (images, icons) served publicly:
 
 ## License
 
-This project is open source. Add your preferred license here.
+This project is licensed under the MIT License
