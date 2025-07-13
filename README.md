@@ -52,13 +52,6 @@
    ```
    অ্যাপটি চালু হবে `http://localhost:3000` এ।
 
-### উপলব্ধ স্ক্রিপ্ট
-
-- `npm run dev`: ডেভেলপমেন্ট মোডে অ্যাপ চালায়।
-- `npm run build`: প্রোডাকশনের জন্য বিল্ড তৈরি করে।
-- `npm run start`: প্রোডাকশন সার্ভার চালায়।
-- `npm run lint`: ESLint চালিয়ে কোড বিশ্লেষণ করে।
-
 ### প্রজেক্ট স্ট্রাকচার
 
 ```
@@ -254,13 +247,6 @@ This is a fully-featured documentation site built with Next.js 13 (App Router), 
    ```
 
    Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Available Scripts
-
-- `npm run dev` - Starts the app in development mode.
-- `npm run build` - Builds the production-ready application.
-- `npm run start` - Runs the production build.
-- `npm run lint` - Runs ESLint for code analysis.
 
 ## Project Structure
 
