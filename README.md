@@ -1,4 +1,4 @@
-> **ইংরেজি ভার্সন দেখতে ক্লিক করুন**: [English Version](#english-version)
+> **For English Version Please click here**: [English Version](#english-version)
 
 # ডকুমেন্ট ক্র্যাফট - প্রোটোকলের দ্বারা নির্মিত একটি ডকুমেন্টেশন ওয়েবসাইট
 
@@ -188,6 +188,8 @@ Your markdown content…
 এই প্রজেক্টটি ওপেন সোর্স। লাইসেন্স এখানে যোগ করুন।
 
 ---
+
+<a id="english-version"></a>
 
 ## English Version&#x20;
 
