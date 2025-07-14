@@ -221,7 +221,6 @@ This is a fully-featured documentation site built with Next.js 13 (App Router), 
 
 - Node.js v16 or higher
 - npm or yarn
-- A terminal or command-line interface
 
 ## Installation
 
